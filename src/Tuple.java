@@ -1,37 +1,65 @@
+import java.math.BigInteger;
+
 public class Tuple {
+    //Integer tuple
+    private int intOne, intTwo;
 
-    private int one, two;
-
-    public Tuple (int one, int two) {
-        this.one = one;
-        this.two = two;
+    public Tuple(int intOne, int intTwo) {
+        this.intOne = intOne;
+        this.intTwo = intTwo;
     }
 
     public int getOne() {
-        return one;
+        return intOne;
     }
 
     public int getTwo() {
-        return two;
+        return intTwo;
     }
 
-    public int getLowest () {
-        if (one <= two) {
-            return one;
+    public int getLowest() {
+        if (intOne <= intTwo) {
+            return intOne;
         } else {
-            return two;
+            return intTwo;
         }
     }
 
-    public int getHighest () {
-        if (one >= two) {
-            return one;
+    public int getHighest() {
+        if (intOne >= intTwo) {
+            return intOne;
         } else {
-            return two;
+            return intTwo;
         }
     }
 
-    public int getDifference () {
-        return Math.abs(one - two);
+    public int getDifference() {
+        return Math.abs(intOne - intTwo);
+    }
+
+    //BigInteger tuple
+    private BigInteger bigIntOne, bigIntTwo;
+
+    public Tuple(BigInteger one, BigInteger two) {
+        this.bigIntOne = one;
+        this.bigIntTwo = two;
+    }
+
+    public BigInteger getBigIntOne() {
+        return bigIntOne;
+    }
+
+    public BigInteger getBigIntTwo() {
+        return bigIntTwo;
+    }
+
+    public static BigInteger pow(BigInteger base, BigInteger exponent) {
+        BigInteger result = BigInteger.ONE;
+        while (exponent.signum() > 0) {
+            if (exponent.testBit(0)) result = result.multiply(base);
+            base = base.multiply(base);
+            exponent = exponent.shiftRight(1);
+        }
+        return result;
     }
 }

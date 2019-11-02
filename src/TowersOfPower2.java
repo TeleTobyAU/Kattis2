@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -12,28 +13,28 @@ public class TowersOfPower2 {
             inputs.add(io.getWord());
         }
 
-        LinkedHashMap<String, Double> values = new LinkedHashMap<>();
+        LinkedHashMap<String, BigInteger> values = new LinkedHashMap<>();
         for (int i = 0; i < n; i++) {
             if (inputs.get(i).contains("^")) {
                 ArrayList<String> nums = new ArrayList<>(Arrays.asList(inputs.get(i).split("\\D")));
-                Tuple t = new Tuple(Integer.parseInt(nums.get(nums.size() - 2)), Integer.parseInt(nums.get(nums.size() - 1)));
+                Tuple t = new Tuple(BigInteger.valueOf(Long.parseLong(nums.get(nums.size() - 2))), BigInteger.valueOf(Long.parseLong(nums.get(nums.size() - 1))));
                 nums.remove(nums.size() - 1);
                 nums.remove(nums.size() - 1);
 
-                double val = (int) Math.pow(t.getOne(), t.getTwo());
+                BigInteger val = t.getBigIntOne().pow(t.getBigIntTwo().intValue());
                 for (int j = nums.size() - 1; j >= 0; j--) {
-                    val = Math.pow(Integer.parseInt(nums.get(j)), val);
+                    val = Tuple.pow(BigInteger.valueOf(Long.parseLong(nums.get(j))), val);
                 }
 
-                //System.out.println(inputs.get(i) + " " + val);
+                System.out.println(inputs.get(i) + " " + val);
                 values.put(inputs.get(i), val);
             } else {
-                //System.out.println(inputs.get(i));
-                values.put(inputs.get(i), Double.parseDouble(inputs.get(i)));
+                System.out.println(inputs.get(i));
+                values.put(inputs.get(i), BigInteger.valueOf(Long.parseLong(inputs.get(i))));
             }
         }
 
-        ArrayList<Double> nums = new ArrayList<>(values.values());
+        ArrayList<BigInteger> nums = new ArrayList<>(values.values());
         Collections.sort(nums);
         System.out.println("Case 1:");
 
@@ -48,3 +49,7 @@ public class TowersOfPower2 {
         }
     }
 }
+/*
+Sorter efter mængde af eksponenter
+og så deres værdier
+ */
