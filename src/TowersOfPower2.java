@@ -38,9 +38,9 @@ public class TowersOfPower2 {
         Collections.sort(nums);
         System.out.println("Case 1:");
 
-        for (int i = 0; i < nums.size(); i++) {
+        for (BigInteger i : nums) {
             for (String k : values.keySet()) {
-                if (values.get(k) == nums.get(i)) {
+                if (values.get(k).equals(i)) {
                     System.out.println(k);
                     values.remove(k);
                     break;
