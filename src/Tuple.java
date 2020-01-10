@@ -62,4 +62,17 @@ public class Tuple {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        return intOne + " " + intTwo;
+    }
+
+    public static int fac(int number) {
+        int fact = 1;
+        for(int i = 1; i <= number; i++){
+            fact = fact * i;
+        }
+        return fact;
+    }
 }
