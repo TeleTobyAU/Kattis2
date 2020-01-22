@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.util.*;
+import java.util.regex.*;
 
 public class AddEmUp {
     public static void main(String[] args) {
@@ -15,7 +16,6 @@ public class AddEmUp {
             }
         }
 
-        boolean works = false;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (i != j) {
@@ -23,37 +23,24 @@ public class AddEmUp {
                             (cards.get(i).getOne() + cards.get(j).getTwo() == s) ||
                             (cards.get(i).getTwo() + cards.get(j).getOne() == s) ||
                             (cards.get(i).getTwo() + cards.get(j).getTwo() == s)) {
-                        works = true;
+                        System.out.println("YES");
+                        return;
                     }
                 }
             }
         }
-
-        for (Tuple t: cards) {
-            System.out.println(t.getOne() + " " + t.getTwo());
-        }
-
-        if (works) {
-            System.out.println("YES");
-        } else {
-            System.out.println("NO");
-        }
+        System.out.println("NO");
     }
 
     private static boolean canFlip(int i) {
-        String number = String.valueOf(i);
-        return !(number.contains("3") || number.contains("4") || number.contains("7"));
+        String pattern = "(3)(4)(7)";
+        Pattern p = Pattern.compile(pattern);
+        Matcher m = p.matcher(String.valueOf(i));
+        return !(m.find());
     }
 
     private static int flippedValue(int i) {
-        String number = String.valueOf(i);
-        char[] flippedNumber = new char[number.length()];
-
-        for (int j = number.length()-1; j >= 0; j--) {
-                char currChar = number.charAt(j);
-                flippedNumber[number.length()-j] = currChar;
-        }
-
-        return Integer.parseInt(String.valueOf(flippedNumber));
+        StringBuilder sb = new StringBuilder();
+        return Integer.parseInt(sb.append(i).reverse().toString());
     }
 }
